@@ -34,4 +34,43 @@ public class Cards {
 
     @Column(nullable = false)
     private String assigned_to;
+
+    public Cards(String title, String description, String assigned_to){
+        this.title = title;
+        this.description = description;
+        this.created_at = java.time.LocalDateTime.now().toString();
+        this.assigned_to = assigned_to;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public long getColumn_id() {
+        return column_id;
+    }
+
+    public void setColumn_id(long column_id) {
+        this.column_id = column_id;
+    }
+
+    public String getTitle() {
+        return title;
+    }   
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getCreated_at() {
+        return created_at;
+    }
 }

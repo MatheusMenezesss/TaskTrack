@@ -1,0 +1,7 @@
+package br.ufpe.tasktrack.repository;
+import br.ufpe.tasktrack.domain.Cards;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface CardsRepository extends JpaRepository<Cards, Long> {
+
+}

@@ -26,4 +26,46 @@ public class Columns {
 
     @Column(nullable = false)
     private int order_index;
+
+    public Columns(String name, int wip_limit, int order_index){
+        this.name = name;
+        this.wip_limit = wip_limit;
+        this.order_index = order_index;
+    }
+
+    public Long getId() {
+        return id;
+    }   
+
+    public Long getBoardId() {
+        return boardId;
+    }
+
+    public void setBoardId(Long boardId) {
+        this.boardId = boardId;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getWip_limit() {
+        return wip_limit;
+    }
+
+    public void setWip_limit(int wip_limit) {
+        this.wip_limit = wip_limit;
+    }
+
+    public int getOrder_index() {
+        return order_index;
+    }
+
+    public void setOrder_index(int order_index) {
+        this.order_index = order_index;
+    }
 }

@@ -27,4 +27,20 @@ public class Boards {
         this.name = name;
         this.created_at = LocalDateTime.now();
     }
+
+    public long getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public LocalDateTime getCreated_at() {
+        return created_at;
+    }
 }

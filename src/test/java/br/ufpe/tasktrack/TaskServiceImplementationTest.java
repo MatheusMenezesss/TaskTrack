@@ -1,7 +1,8 @@
-package br.ufpe.tasktrack.service;
+package br.ufpe.tasktrack;
 
 import br.ufpe.tasktrack.domain.Task;
 import br.ufpe.tasktrack.repository.TaskRepository;
+import br.ufpe.tasktrack.service.TaskServiceImplementation;
 
 import org.hibernate.annotations.TimeZoneStorage;
 import org.junit.jupiter.api.BeforeEach;
