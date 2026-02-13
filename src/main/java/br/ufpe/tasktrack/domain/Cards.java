@@ -1,62 +1,61 @@
 package br.ufpe.tasktrack.domain;
 
-import org.hibernate.annotations.IdGeneratorType;
-
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "cards")
 public class Cards {
-    //id, column_id, title, description, created_at, position (posição do card na coluna), assigned_to (usuário atribuído ao card)
-    @Id
-    @GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY) //diz ao jpa/hibernate: o valor é gerado pelo róprio banco de dados
-    private Long id;
+    // id, column_id, title, description, created_at, position, assigned_to
 
     @Id
-    @GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)
-    private long column_id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(nullable = false)
+    private Long columnId;
 
     @Column(nullable = false)
     private String title;
 
     @Column(length = 1000)
-    private String description; 
+    private String description;
 
     @Column(nullable = false)
-    private String created_at;
+    private String createdAt;
 
     @Column(nullable = false)
     private int position;
 
     @Column(nullable = false)
-    private String assigned_to;
+    private String assignedTo;
 
-    public Cards(String title, String description, String assigned_to){
+    // Constructor
+    public Cards(String title, String description, String assignedTo) {
         this.title = title;
         this.description = description;
-        this.created_at = java.time.LocalDateTime.now().toString();
-        this.assigned_to = assigned_to;
+        this.assignedTo = assignedTo;
     }
 
+    // Getters and Setters
     public Long getId() {
         return id;
     }
 
-    public long getColumn_id() {
-        return column_id;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public void setColumn_id(long column_id) {
-        this.column_id = column_id;
+    public Long getColumnId() {
+        return columnId;
+    }
+
+    public void setColumnId(Long columnId) {
+        this.columnId = columnId;
     }
 
     public String getTitle() {
         return title;
-    }   
+    }
 
     public void setTitle(String title) {
         this.title = title;
@@ -70,7 +69,27 @@ public class Cards {
         this.description = description;
     }
 
-    public String getCreated_at() {
-        return created_at;
+    public String getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(String createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public int getPosition() {
+        return position;
+    }
+
+    public void setPosition(int position) {
+        this.position = position;
+    }
+
+    public String getAssignedTo() {
+        return assignedTo;
+    }
+
+    public void setAssignedTo(String assignedTo) {
+        this.assignedTo = assignedTo;
     }
 }

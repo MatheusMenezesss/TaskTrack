@@ -5,14 +5,15 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Table;
 import jakarta.persistence.Id;
 import jakarta.persistence.Column;
+import jakarta.persistence.IdClass;
 
+@IdClass(ColumnsId.class)
 @Entity
 @Table(name = "columns")
 public class Columns {
     //id, boeard_id, name, wip_limit (limite de tarefas na coluna), order_index (posição da coluna no quadro)
     
     @Id
-    @GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)
     private Long id;
 
     @Id
@@ -27,7 +28,9 @@ public class Columns {
     @Column(nullable = false)
     private int order_index;
 
-    public Columns(String name, int wip_limit, int order_index){
+    public Columns() {}
+
+    public Columns(String name, int wip_limit, int order_index) {
         this.name = name;
         this.wip_limit = wip_limit;
         this.order_index = order_index;

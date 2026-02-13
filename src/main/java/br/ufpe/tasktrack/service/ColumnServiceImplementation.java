@@ -4,12 +4,13 @@ import br.ufpe.tasktrack.domain.Columns;
 import br.ufpe.tasktrack.repository.ColumnsRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
-
-public class ColumnServiceImplementation {
+@Service
+public class ColumnServiceImplementation implements ColumnService {
 
     private static final Logger logger = LoggerFactory.getLogger(ColumnServiceImplementation.class);
 
@@ -22,10 +23,9 @@ public class ColumnServiceImplementation {
     @Override
     @Transactional
     public Columns create(Columns column) {
-        Optional<Columns> aux = repository.findById(column.getId());
-        if(aux.isPresent()){
+        if (repository.existsById(column.getId())) {
             logger.error("Column with id {} already exists", column.getId());
-            return null;
+            throw new IllegalArgumentException("Column already exists");
         }
         logger.info("Column with id {} added successfully", column.getId());
         return repository.save(column);
@@ -34,28 +34,24 @@ public class ColumnServiceImplementation {
     @Override
     @Transactional
     public Columns update(Long id, Columns column) {
-        Optional<Columns> existing = repository.findById(column.getId());
-        if(existing.isEmpty()){
-            logger.error("Column with id {} not found for update", column.getId());
-            return null;
-        }
-        Columns updatedColumn = existing.get();
-        updatedColumn.setTitle(column.getTitle());
-        updatedColumn.setDescription(column.getDescription());
+        Columns existing = repository.findById(id).orElseThrow(() -> {
+            logger.error("Column with id {} not found for update", id);
+            return new IllegalArgumentException("Column not found");
+        });
+        existing.setName(column.getName());
 
-        logger.info("Column with id {} updated successfully", column.getId());
-        return repository.save(updatedColumn);
+        logger.info("Column with id {} updated successfully", id);
+        return repository.save(existing);
     }
 
     @Override
     @Transactional
     public void delete(Long id) {
-        Optional<Columns> existing = repository.findById(id);
-        if(existing.isEmpty()){
+        Columns existing = repository.findById(id).orElseThrow(() -> {
             logger.error("Column with id {} not found for deletion", id);
-            return;
-        }
+            return new IllegalArgumentException("Column not found");
+        });
         logger.info("Column with id {} deleted successfully", id);
-        repository.delete(existing.get());
+        repository.delete(existing);
     }
 }

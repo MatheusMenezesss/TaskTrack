@@ -4,11 +4,12 @@ import br.ufpe.tasktrack.domain.Boards;
 import br.ufpe.tasktrack.repository.BoardsRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
-
+@Service
 public class BoardServiceImplementation implements BoardService {
 
     private static final Logger logger = LoggerFactory.getLogger(BoardServiceImplementation.class);
@@ -22,10 +23,9 @@ public class BoardServiceImplementation implements BoardService {
     @Override
     @Transactional
     public Boards create(Boards board) {
-        Optional<Boards> aux = repository.findById(board.getId());
-        if(aux.isPresent()){
+        if (repository.existsById(board.getId())) {
             logger.error("Board with id {} already exists", board.getId());
-            return null;
+            throw new IllegalArgumentException("Board already exists");
         }
         logger.info("Board with id {} added successfully", board.getId());
         return repository.save(board);
@@ -34,28 +34,24 @@ public class BoardServiceImplementation implements BoardService {
     @Override
     @Transactional
     public Boards update(Long id, Boards board) {
-        Optional<Boards> existing = repository.findById(board.getId());
-        if(existing.isEmpty()){
-            logger.error("Board with id {} not found for update", board.getId());
-            return null;
-        }
-        Boards updatedBoard = existing.get();
-        updatedBoard.setTitle(board.getTitle());
-        updatedBoard.setDescription(board.getDescription());
+        Boards existing = repository.findById(id).orElseThrow(() -> {
+            logger.error("Board with id {} not found for update", id);
+            return new IllegalArgumentException("Board not found");
+        });
+        existing.setName(board.getName());
 
-        logger.info("Board with id {} updated successfully", board.getId());
-        return repository.save(updatedBoard);
+        logger.info("Board with id {} updated successfully", id);
+        return repository.save(existing);
     }
 
     @Override
     @Transactional
     public void delete(Long id) {
-        Optional<Boards> existing = repository.findById(id);
-        if(existing.isEmpty()){
+        Boards existing = repository.findById(id).orElseThrow(() -> {
             logger.error("Board with id {} not found for deletion", id);
-            return;
-        }
+            return new IllegalArgumentException("Board not found");
+        });
         logger.info("Board with id {} deleted successfully", id);
-        repository.delete(existing.get());
+        repository.delete(existing);
     }
 }
