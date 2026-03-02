@@ -1,11 +1,18 @@
 package br.ufpe.tasktrack.service;
 
 import br.ufpe.tasktrack.domain.Boards;
+import br.ufpe.tasktrack.DTO.BoardDTO;
+
+import java.util.List;
 
 public interface BoardService {
-    Boards create(Boards board);
+    BoardDTO create(BoardDTO boardDTO);
 
-    Boards update(Long id, Boards board);
+    BoardDTO update(Long id, BoardDTO boardDTO);
 
     void delete(Long id);
-} 
+
+    BoardDTO getBoardById(Long id);
+
+    List<BoardDTO> getAllBoards(); // Renamed to reflect returning all boards
+}

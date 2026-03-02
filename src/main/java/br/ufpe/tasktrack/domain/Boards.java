@@ -23,7 +23,11 @@ public class Boards {
     @Column(nullable = false)
     private LocalDateTime created_at;
 
-    public Boards(String name){
+    public Boards() {
+        // Default constructor for JPA
+    }
+
+    public Boards(String name) {
         this.name = name;
         this.created_at = LocalDateTime.now();
     }
@@ -37,10 +41,20 @@ public class Boards {
     }
 
     public void setName(String name) {
+        if (name == null || name.trim().isEmpty()) {
+            throw new IllegalArgumentException("Board name cannot be null or empty");
+        }
         this.name = name;
     }
 
     public LocalDateTime getCreated_at() {
         return created_at;
+    }
+
+    public void setCreated_at(LocalDateTime created_at) {
+        if (created_at == null) {
+            throw new IllegalArgumentException("Creation date cannot be null");
+        }
+        this.created_at = created_at;
     }
 }

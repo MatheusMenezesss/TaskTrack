@@ -1,12 +1,15 @@
 package br.ufpe.tasktrack.service;
 
 import br.ufpe.tasktrack.domain.Boards;
+import br.ufpe.tasktrack.DTO.BoardDTO;
 import br.ufpe.tasktrack.repository.BoardsRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -22,36 +25,53 @@ public class BoardServiceImplementation implements BoardService {
 
     @Override
     @Transactional
-    public Boards create(Boards board) {
-        if (repository.existsById(board.getId())) {
-            logger.error("Board with id {} already exists", board.getId());
-            throw new IllegalArgumentException("Board already exists");
-        }
-        logger.info("Board with id {} added successfully", board.getId());
-        return repository.save(board);
+    public BoardDTO create(BoardDTO boardDTO) {
+        Boards board = new Boards(boardDTO.name());
+        Boards savedBoard = repository.save(board);
+        return new BoardDTO(savedBoard.getName());
     }
 
     @Override
     @Transactional
-    public Boards update(Long id, Boards board) {
-        Boards existing = repository.findById(id).orElseThrow(() -> {
-            logger.error("Board with id {} not found for update", id);
-            return new IllegalArgumentException("Board not found");
-        });
-        existing.setName(board.getName());
-
-        logger.info("Board with id {} updated successfully", id);
-        return repository.save(existing);
+    public BoardDTO update(Long id, BoardDTO boardDTO) {
+        Optional<Boards> optionalBoard = repository.findById(id);
+        if (optionalBoard.isPresent()) {
+            Boards board = optionalBoard.get();
+            board.setName(boardDTO.name());
+            Boards updatedBoard = repository.save(board);
+            return new BoardDTO(updatedBoard.getName());
+        }
+        throw new IllegalArgumentException("Board not found");
     }
 
     @Override
     @Transactional
     public void delete(Long id) {
-        Boards existing = repository.findById(id).orElseThrow(() -> {
-            logger.error("Board with id {} not found for deletion", id);
-            return new IllegalArgumentException("Board not found");
-        });
-        logger.info("Board with id {} deleted successfully", id);
-        repository.delete(existing);
+        repository.deleteById(id);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public BoardDTO getBoardById(Long id) {
+        Optional<Boards> optionalBoard = repository.findById(id);
+        if (optionalBoard.isPresent()) {
+            Boards board = optionalBoard.get();
+            return new BoardDTO(board.getName());
+        }
+        throw new IllegalArgumentException("Board not found");
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<BoardDTO> getAllBoards() {
+        logger.info("buscando todos os boards");
+        List<Boards> boards = repository.findAll();
+        logger.info("boards encontrados: {}", boards);
+        List<BoardDTO> boardDTOs = new ArrayList<>();
+        for (Boards board : boards) {
+            boardDTOs.add(new BoardDTO(board.getName()));
+        }
+        logger.info("boardDTOs criados: {}", boardDTOs);
+        return boardDTOs;
     }
 }
