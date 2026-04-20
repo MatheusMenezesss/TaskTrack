@@ -19,4 +19,30 @@ public class Equipamento {
 
     @Column(columnDefinition = "TEXT")
     private String descricao;
+
+    // Getters e Setters
+
+    public Integer getID_equipamento(){
+        return this.id_equipamento;
+    }
+
+    public String getNome(){
+        return this.nome;
+    }
+
+    public String getDescricao(){
+        return this.descricao;
+    }
+
+    public void setDescricao(String descricao){
+        this.descricao = descricao;
+    }
+
+    // Construtor
+    public Equipamento() {} //o contrutor vazio deve exitir para o JPA funcionar
+
+    public Equipamento(String nome, String descricao){
+        this.nome = nome;
+        this.descricao = descricao;
+    }
 }

@@ -65,6 +65,54 @@ public class Emprestimo {
     @Column
     private String status;
 
+    // Getters e Setters
+
+    public Integer getID_emprestimo(){
+        return this.id_emprestimo;
+    }
+
+    public Integer getID_usuario(){
+        return this.id_usuario;
+    }
+
+    public Integer getID_equipamento(){
+        return this.id_equipamento;
+    }
+
+    public Integer getID_estoque(){
+        return this.id_estoque;
+    }
+
+    public Integer getQtd_emprestada(){
+        return this.qtd_emprestada;
+    }
+
+    public Integer getQtd_devolvida(){
+        return this.qtd_devolvida;
+    }
+
+    public LocalDateTime getData_saida(){
+        return this.data_saida;
+    }
+
+    public LocalDateTime getData_retorno_prevista(){
+        return this.data_retorno_prevista;
+    }
+
+    public LocalDateTime getData_retorno_real(){
+        return this.data_retorno_real;
+    }
+
+    public String getStatus(){
+        return this.status;
+    }
+
+    
+
+
+
+
+
 
 
 }

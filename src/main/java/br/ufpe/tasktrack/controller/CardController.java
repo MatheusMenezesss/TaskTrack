@@ -1,3 +1,4 @@
+/* 
 package br.ufpe.tasktrack.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,7 +31,7 @@ import org.slf4j.LoggerFactory;
     @Column(nullable = false)
     private String assignedTo;
 */
-
+/* 
 @RestController
 @RequestMapping("/cards")
 public class CardController {
@@ -47,3 +48,5 @@ public class CardController {
         List<CardDTO> cards = new ArrayList<>(cardDTOs);
 
 }
+
+*/
