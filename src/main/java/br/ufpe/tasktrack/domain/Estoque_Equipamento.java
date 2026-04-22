@@ -26,4 +26,15 @@ public class Estoque_Equipamento {
 
     @Column
     private Integer quantidade_disponivel;
+
+    // Getters e Setters
+    public void setQuantidade_total(Integer quantidade_total){
+        this.quantidade_total = quantidade_total;
+    }
+
+    public void setQuantidade_disponivel(Integer quantidade_disponivel){
+        this.quantidade_disponivel = quantidade_disponivel;
+    }
+
+
 }

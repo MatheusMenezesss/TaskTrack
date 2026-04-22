@@ -22,4 +22,12 @@ public class Estoque {
 
     @Column(length = 50)
     private String nome;
+
+    // Getters e Setters
+
+    public void setName(String name){
+        this.nome = name;
+    }
+
+
 }

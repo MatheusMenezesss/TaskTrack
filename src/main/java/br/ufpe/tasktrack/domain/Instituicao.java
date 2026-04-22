@@ -19,4 +19,30 @@ public class Instituicao {
 
     @Column(length = 10)
     private String sigla;
+
+        // Getters e Setters
+    
+        public String getNome(){
+            return this.nome;
+        }
+    
+        public String getSigla(){
+            return this.sigla;
+        }
+    
+        public void setNome(String nome){
+            this.nome = nome;
+        }
+    
+        public void setSigla(String sigla){
+            this.sigla = sigla;
+        }
+    
+        // Construtor
+        public Instituicao() {} //o contrutor vazio deve exitir para o JPA funcionar
+    
+        public Instituicao(String nome, String sigla){
+            this.nome = nome;
+            this.sigla = sigla;
+        }
 }
