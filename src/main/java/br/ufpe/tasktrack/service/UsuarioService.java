@@ -17,5 +17,11 @@ public interface UsuarioService {
     public List<String> getALLusers();
 
     public UsuarioDTO updateUser(Integer id_usuario, String nome, String cpf, String endereco, String email, String login, String contato, String privilegio);
+
+    public void deleteUser(Integer id_usuario);
+
+    public Optional<Usuario> getUserById(Integer id_usuario);
+
+    public boolean userExists(Integer id_usuario);
  
 }
