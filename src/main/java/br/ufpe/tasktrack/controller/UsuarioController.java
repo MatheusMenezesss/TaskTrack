@@ -10,7 +10,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/usuarios")
 public class UsuarioController {
-    @Autowired
+    @Autowired  // Injeção de dependência do repositório
     private UsuarioRepository usuarioRepository;
 
     // Endpoint GET: http://localhost:8080/usuarios

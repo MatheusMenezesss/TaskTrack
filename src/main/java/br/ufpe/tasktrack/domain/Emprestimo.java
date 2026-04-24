@@ -6,6 +6,7 @@ import java.time.LocalDateTime;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import lombok.Data;
 import jakarta.persistence.Column;
 import jakarta.persistence.GeneratedValue;
 
@@ -30,7 +31,7 @@ import jakarta.persistence.GeneratedValue;
 
     status: Enum ('Ativo', 'Finalizado', 'Parcial').
 */
-
+@Data
 @Entity
 @Table(name = "emprestimo")
 public class Emprestimo {
@@ -46,23 +47,11 @@ public class Emprestimo {
 
     @Column(nullable = false)
     private Integer id_estoque;
-
-    @Column
     private Integer qtd_emprestada;
-
-    @Column
     private Integer qtd_devolvida = 0;
-
-    @Column
     private LocalDateTime data_saida;
-
-    @Column
     private LocalDateTime data_retorno_prevista;
-
-    @Column
     private LocalDateTime data_retorno_real;
-
-    @Column
     private String status;
 
     // Getters e Setters
