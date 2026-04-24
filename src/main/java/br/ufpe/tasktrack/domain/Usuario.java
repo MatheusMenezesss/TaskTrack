@@ -40,5 +40,19 @@ public class Usuario {
         this.cpf = cpf;
     }
 
+    public Usuario() {}
+
+    public Usuario(String nome, String cpf, String endereco, String email, String login, String contato, String privilegio) {
+        this.nome = nome;
+        this.cpf = cpf;
+        this.endereco = endereco;
+        this.email = email;
+        this.login = login;
+        this.contato = contato;
+        this.privilegio = privilegio;
+    }
+
+    //Usuario("Matheus","12345678910", "matheus@email.com", "Rua dos Bobos, 0", "matheus123", "99999-9999", "admin");
+
 
 }
