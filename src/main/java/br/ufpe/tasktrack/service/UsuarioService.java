@@ -21,7 +21,5 @@ public interface UsuarioService {
     public void deleteUser(Integer id_usuario);
 
     public Optional<Usuario> getUserById(Integer id_usuario);
-
-    public boolean userExists(Integer id_usuario);
  
 }

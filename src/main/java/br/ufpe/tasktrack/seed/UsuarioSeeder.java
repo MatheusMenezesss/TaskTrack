@@ -32,15 +32,15 @@ public class UsuarioSeeder {
 
             usuarioRepo.saveAll(usuarios);
 
-            Instituicao i1 = new Instituicao("Universidade Federal de Pernambuco", "UFPE");
-            Instituicao i2 = new Instituicao("Universidade de Pernambuco", "UPE");
-            Instituicao i3 = new Instituicao("Instituto Federal de Pernambuco", "IFPE");
-            Instituicao i4 = new Instituicao("Universidade Federal Rural de Pernambuco", "UFRPE");
+            Vector<Instituicao> instituicoes = new Vector<>();
 
-            instRepo.save(i1);
-            instRepo.save(i2);
-            instRepo.save(i3);
-            instRepo.save(i4);
+
+            instituicoes.add(new Instituicao("Universidade Federal de Pernambuco", "UFPE"));
+            instituicoes.add( new Instituicao("Universidade de Pernambuco", "UPE"));
+            instituicoes.add( new Instituicao("Instituto Federal de Pernambuco", "IFPE"));
+            instituicoes.add(new Instituicao("Universidade Federal Rural de Pernambuco", "UFRPE"));
+
+            instRepo.saveAll(instituicoes);
         };
     }
 
